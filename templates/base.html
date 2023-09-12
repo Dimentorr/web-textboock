@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    {% block import_content %}
+    <link rel= "stylesheet" href= "../static/css/base.css"> <!-- базовый -->
+    <link rel= "stylesheet" href= "../static/css/head.css"> <!-- шапка -->
+    <link rel= "stylesheet" href= "../static/css/body.css"> <!-- основной блок -->
+    <link rel= "stylesheet" href= "../static/css/all_content's_blocks.css"> <!-- стили для основного блока контента -->
+    <link rel= "stylesheet" href= "../static/css/drop_block.css"> <!-- выпадающий список в боковом меню --->
+    <link rel= "stylesheet" href= "../static/css/gallery.css"> <!-- галерея фоток --->
+    {% endblock %}
+</head>
+<body>
+    <header class="header">
+        {% block head_content %}{% endblock %}
+    </header>
+
+    <div class="all-content">
+        <div class="main-columns">
+            <div class="first-column">
+
+                <ul id="navbar">
+
+                    <div><li><button onclick="window.location.href='/'">Главная</button></li></div>
+                    <div><li><button onclick="window.location.href='/programs'">Используемое ПО</button></li></div>
+                    <div><li><button onclick="window.location.href='/create_project'">Создание игрового проекта</button></li></div>
+                    <div>
+                        <li><button>Работа с файлами</button>
+                        <div class="sublist" id="mini">
+                            <ul>
+                                <li><button onclick="window.location.href='/import'">Импорт</button></li>
+                                <li><button onclick="window.location.href=''">Нарезка спрайтов</button></li>
+                            </ul>
+                            </div>
+                        </li>
+                    </div>
+                    <div>
+                        <li><button>Разработка игры</button>
+                            <div class="sublist">
+                            <ul>
+                                <li><button onclick="window.location.href='/bd'">База данных</button></li>
+                                <li><button onclick="window.location.href='/ui'">UI</button></li>
+                                <li><button onclick="window.location.href='/generate_cart'">Генерация поля</button></li>
+                                <li><button onclick="window.location.href='/placement_towers'">Размещение башен</button></li>
+                                <li><button onclick="window.location.href='/logic_enemies'">Разработка врагов</button></li>
+                                <li><button onclick="window.location.href='/logic_towers'">Логика башен</button></li>
+                                <li><button onclick="window.location.href='/end'">Условия завершения уровня</button></li>
+                            </ul>
+                                </div>
+                        </li>
+                    </div>
+                    <div><li><button onclick="window.location.href='/conclusion'">Заключение</button></li></div>
+                </ul>
+            </div>
+
+            <div class="second-column">
+            <!-- блоки пока что для тестов стилей--->
+                <div id="second-column-content">
+                <!-- блок основной темы--->
+                    <div class="title">
+                        <h1 class="custom-h1">{{ title_page }}<hr></h1>
+                    </div>
+                    <!-- блок подраздела--->
+                    <div class="subtitle">
+                        <h2 class="custom-h2">{{ subtitle_page }}</h2>
+                    </div>
+                    {% block main_content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--    <footer class="footer"></footer>-->
+</body>
+</html>

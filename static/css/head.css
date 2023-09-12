@@ -1,0 +1,29 @@
+.header
+{
+  top: 0;
+  z-index: 1;
+  position: fixed;
+  background-color: #d0cdd1;
+  background-image: url("../img/head.png");
+  background-size: contain;
+  width: 100%;
+  height: 13rem;
+  background-position: center;
+  -webkit-background-size: cover;
+  background-size: cover;
+}
+/* переопределение списка li для размещения элементов списка горизонтально */
+/* скорее всего потом уйдёт из-за ненадобности */
+
+/* картинка на шапке */
+.img-on-head
+{
+}
+
+
+@media screen and (max-width: 1600px){
+    .header
+    {
+        height: 10rem;
+    }
+}

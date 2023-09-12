@@ -1,0 +1,56 @@
+/* класс, отедяющий шапку от основного блока */
+.all-content
+{
+    flex: 1 0 auto;
+    margin-top: 13rem;
+}
+
+/* класс, разделяющий основной блок на колонки для работы */
+.main-columns
+{
+    display: grid;
+    grid-template-columns: repeat(50, 2vw);
+}
+/* настройка колонок */
+[class*="column"]
+{
+    display: grid;
+}
+.first-column
+{
+    background-color: #181616;
+    grid-column: 4/11;
+    height: 80vh;
+}
+
+.second-column
+{
+    height: 100%;
+    min-width: 650px;
+    background-color: #302a2a;
+    /*background-color: #dfedeb;*/
+    grid-column: 11/48;
+/*    grid-template-row: 3rem */
+
+}
+/* для заполнения 2ой колонки блоком с дисплеем inline-block, чтобы блоки "приклеивались" друг к другу */
+#second-column-content{
+    display: inline-block;
+    height: 100%;
+}
+
+.third-column
+{
+    grid-column: 48/51;
+}
+
+.margin-ul
+{
+    margin-left: 25px;
+}
+@media screen and (max-width: 1600px){
+    .all-content
+    {
+        margin-top: 10rem;
+    }
+}

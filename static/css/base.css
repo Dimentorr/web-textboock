@@ -1,0 +1,43 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    }
+
+html{
+    height: 100%;
+    }
+
+.header{
+/* display: none;*/
+  top: 0;
+  z-index: 1;
+  position: fixed;
+  background-color: #d0cdd1;
+  width: 100%;
+  background-position: center;
+  -webkit-background-size: cover;
+  background-size: cover;
+    }
+
+body{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #181616;
+    /*background-color: rgb(245 251 244);*/
+    }
+
+.custom-h1{
+    color: #efff00;
+}
+
+.custom-h2{
+    color: #0e86ed;
+}
+
+footer{
+}
+    flex: 0 0 auto;
+	height: 250px;
+    background-color: #d0cdd1;
+}

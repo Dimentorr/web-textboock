@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+            <!-- блок материала--->
+            <div>
+                <h4 class="content-text">
+<p>Генерация игрового поля будет осуществляться в несколько этапов:<br>
+    - генерация основного пласта поля;<br>
+    - изменение части клеток игрового поля под те задачи, которые они должны будут осуществлять.
+</p><br>
+
+<p>
+    Для удобства создадим 2 функции: "SpawnPlace" и "BuildOtherPlace"<br><br>
+    <div class="gallery">
+    <img src="../static/img/generate_cart/SpawnPlace.jpg" alt="скрипт 'SpawnPlace'" tabindex="0">
+    <img src="../static/img/generate_cart/BuildOtherPlace.jpg" alt="скрипт 'BuildOtherPlace'" tabindex="0">
+    </div>
+                    Игровое поле будет квадратной формы и состоять из клеток (форма которых так же - квадрат) с именами на подобии координат(1;1,1;2...), а значит для его построения нам необходима конструкцию из 2 циклов for.<br>
+    Заполнять же поле мы будем заранее подготовленными <a class="a-text" href="https://blog.skillfactory.ru/glossary/prefab/" target="_blank">префабами</a> стандартных клеток с травой, а после за счёт функции "BuildOtherPlace" меняем определённый клетки соответствующим образом.
+</p><br>
+
+<p>
+    Для клеток дороги это:<br>
+    - изменение спрайта для всех полей;<br>
+    - если это первая клетка дороги, добавление объекту скрипта "Spawner";<br>
+    - если это последняя клетка дороги, добавление объекту <a class="a-text" href="https://docs.unity3d.com/ScriptReference/GameObject-tag.html" target="_blank">тега</a> "end_road";<br>
+    - если это последняя клетка дороги, добавление объекту скрипта "GetDamageFromEnemy";<br>
+    - если это последняя клетка дороги, добавление объекту <a class="a-text" href="https://docs.unity3d.com/ScriptReference/Collider2D.html" target="_blank">колайдера</a> с включённым свойством "isTrigger".<br>
+</p><br>
+
+<p>  Для клеток для размещения башен это:<br>
+    - изменение спрайта клетки;<br>
+    - установка <a class="a-text" href="https://docs.unity3d.com/ScriptReference/GameObject-tag.html" target="_blank">тега</a> "choice_tower";<br>
+    - добавление объекту скрипта "CountClicks";<br>
+    - добавление объекту <a class="a-text" href="https://docs.unity3d.com/ScriptReference/Collider2D.html" target="_blank">колайдера</a>, для дальнейшей возможности отследить нажатие игрока на данной поле;<br>
+    - добавление <a class="a-text" href="https://translated.turbopages.org/proxy_u/en-ru.ru.994318d8-6464766e-d5feda34-74722d776562/https/stackoverflow.com/questions/21495818/what-are-parent-and-child-objects" target="_blank">дочернего</a> объекта(заранее настроенного <a class="a-text" href="https://blog.skillfactory.ru/glossary/prefab/" target="_blank">префаба</a>) с выбором башен и его настройка.<br>
+</p><br>
+<p>
+    Для правильной работы скрипта 'BuildOtherPlace', что можно увидеть выше необходимо предоставить ему спипок с названиями клеток, подвергающихся изменениям. Список с клетками для размещения башен нам необходимо справится самостоятельно, а вот в случаи с дорогами достаточно будет указать лишь углы необходимой нам дороги.<br>
+    Но что делать с клетками дороги между углами? Для решения этого вопроса мы напишем ещё одну функцию "FindAllRoad", принемающую на вход список с названиями углов дороги, а на выходе получим список с названием всех клеток, принадлежащих дороге.<br><br>
+</p>
+                    <div class="gallery">
+                        <img src="../static/img/generate_cart/FindAllRoad.jpg" alt="скрипт 'FindAllRoad' в развёрнутом виде" tabindex="0">
+                    </div>
+
+                </h4>
+            </div>
+{% endblock %}

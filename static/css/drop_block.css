@@ -1,0 +1,76 @@
+
+#navbar div
+{
+display:flex;
+height: 2rem;
+justify-content: center; /* Align horizontal */
+align-items: center; /* Align vertical */
+}
+
+/*убираем отобраение у подсписков и каким-то образом не делаем это у основного*/
+#navbar ul {
+  display: none;
+  background-color: #5c5c5c;
+  /*background-color: #009b12;*/
+  /*background-color: #f90;*/
+}
+/*при наведении на пункт с подсписком активируем его дисплей*/
+
+#navbar li:hover ul { display: block; }
+/*убираем оформление списков (точки и тп перед текстом)*/
+
+#navbar, #navbar ul { list-style-type: none; }
+
+/*высота и цвет элементов*/
+#navbar{
+  height: 30px;
+}
+
+#navbar li {
+  height: 30px;
+  width: 15vw;
+}
+
+/*div для подсписка*/
+.sublist
+{
+    position: absolute;
+    display: block;/*
+    margin-top: 2vh;*/
+    margin-left: 14vw;
+}
+#mini
+{
+    margin-top: -1.7vh;
+}
+/*настройка текста в */
+
+#navbar li button {
+  display: block;
+  color: #fff;
+  background-color: #181616;
+  text-decoration: none;
+  text-align: center;
+  height: 30px;
+  width: 15vw;
+  border-style: none;
+}
+#navbar li span {
+  vertical-align: middle;
+}
+/*изменение цвета, при наведении (для подсписка)*/
+
+#navbar li button:hover { background-color: #5c5c5c; /*background-color: #009b12;*/ /*background-color: #f90;*/ } /* оранжевый */
+#navbar ul li button:hover { background-color: #009b12; /*background-color: #f90;*/ /*background-color: #666;*/ } /* серый */
+
+@media screen and (max-width: 1150px){
+/*    #navbar li
+    {
+        height: 2.5rem;
+        width: 15vw;
+    }*/
+/*    #navbar li button
+    {
+        margin-top: 1vw;
+    }*/
+}

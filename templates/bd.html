@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+            <!-- блок материала--->
+<div>
+    <h4 class="content-text">
+        <p>
+    Для хранения данных в игре мы будем использовать 2 базы данных, одна для хранения данных текущего игрока и другая для хранения данных обо всех игроках. Помимо этого в них будут храниться данные необходимые самой игре.
+    Этапы создания баз данных показаны в этом е разделе ниже.
+</p><br>
+<p>
+    Здесь я покажу как создать базу данных через приложение <a class="a-text" href="https://ospanel.io/download/" target="_blank">OpenServer</a>, однако далее буду использовать подключение к иной базе, что в прочем никак не повлияет на саму разработку (способ создания и подключения к базе данных идентичен в обоих вариантах). Для локальной же базы данных я буду использовать <a class="a-text" href="https://sqlitestudio.pl" target="_blank">SQLiteStudio</a>.
+</p><br>
+<p>
+    После установки OpenServer нам не откроется никакое окно, как это обычно происходит, для взаимодействия с ним необходимо открыть следующее окно и в нём выбрать <a class="a-text" href="https://www.phpmyadmin.net" target="_blank">PhpMyAdmin</a> (перед этим необходимо запустить OpenServer путём нажатия на зелёный флажёк):
+</p><br>
+    <div class="gallery">
+            <img src="../static/img/bd/1.jpg" alt="game_scene.jpg" tabindex="0">
+            <img src="../static/img/bd/2.jpg" alt="game_scene.jpg" tabindex="1">
+            <img src="../static/img/bd/3.jpg" alt="game_scene.jpg" tabindex="2">
+   </div>
+<p>
+    По умолчанию логин пользователя – «root» и пустой пароль уже будут ве-дены, поэтому просто нажимаем кнопку «Авторизоваться». После авторизации мы увидим интер-фейс PhpMyAdmin, слева в навигационной панели изначально будут суще-ствовать только те вкладки, что выделены на скриншоте ниже в красной рамочке и нас они мало интересуют, кроме одной из них. Для создания своей базы данных как не сложно догадаться нам нужно нажать на кнопку «Создать БД».
+</p><br>
+<div class="gallery">
+    <img src="../static/img/bd/4.jpg" alt="game_scene.jpg" tabindex="3">
+</div>
+<p>
+    Введём наименование базы данных в выделенное поле и нажмём «Создать». В открывшемся окне введём подобно предыдущему пункту имя одной из таблиц нашей базы данных, а также укажем количество колонок в ней, по умолчанию указано 4 колонки, потом можно будет добавить недостающее количество, а если останутся лишние просто не заполнять, в этом случаи эти колонки не со-здадутся.
+</p><br>
+<div class="gallery">
+    <img src="../static/img/bd/5.jpg" alt="game_scene.jpg" tabindex="4">
+    <img src="../static/img/bd/6.jpg" alt="game_scene.jpg" tabindex="5">
+</div>
+<p>
+    Заполним таблицу «users», после для сохранения таблицы нажмём «Сохранить». Теперь по аналогии создадим остальные таблицы, в моём случаи «levels», «progressPlayers».
+</p><br>
+<div class="gallery">
+    <img src="../static/img/bd/7.jpg" alt="game_scene.jpg" tabindex="6">
+    <img src="../static/img/bd/8.jpg" alt="game_scene.jpg" tabindex="7">
+</div>
+<p>
+    Мы можем видеть связи таблиц базы данных, ниже рассмотрим, как их создать.
+    Выберем таблицу «progressPlayers» перейдём во вкладку «Структура» и выберем «Связи».
+</p><br>
+<div class="gallery">
+    <img src="../static/img/bd/9.jpg" alt="game_scene.jpg" tabindex="0">
+</div>
+<p>
+    Таким образом мы создали и настроили нашу серверную, а по совместительству и основную базу данных, теперь остаётся её заполнить и подключить к Unity.
+</p><br>
+<div class="gallery">
+    <img src="../static/img/bd/10.jpg" alt="game_scene.jpg" tabindex="0">
+    <img src="../static/img/bd/11.jpg" alt="game_scene.jpg" tabindex="0">
+    <img src="../static/img/bd/12.jpg" alt="game_scene.jpg" tabindex="0">
+    <img src="../static/img/bd/13.jpg" alt="game_scene.jpg" tabindex="0">
+</div>
+<p>
+    Напишем скрипт с функциями взаимодействия с нашей серверной базой данных в последующих скриптах.
+Как видно из подписей закомментированный конструктор нужен для работы с OpenServer, в то время как другой конструктор ссылается на наш хостинг.<br>
+</p><br>
+<p>Теперь рассмотрим, как нам создать и подключить локальную базу данных к Unity.<br>
+Для работы с локальной базой данных необходимо выполнить следующие пункты:<br>
+    <ul class="main-li">
+           <li>создать папку Assets\StreamingAssets и скопировать туда базу;</li>
+           <li>загрузить с <a class="a-text" href="https://www.sqlite.org/download.html" target="_blank">сайта</a>:</li>
+            <ul class="sub-li">
+                <li>Precompiled Binaries for Windows 32-bit DLL (x86) for SQLite;</li>
+                <li>Precompiled Binaries for Windows 64-bit DLL (x86) for SQLite;</li>
+                <li>zip и aar файлы - это архивы. Нужно разархивировать файлы;</li>
+            </ul>
+            <li>создать папку Assets\Plugins;</li>
+            <li>создать папки Assets\Plugins\x86, Assets\Plugins\x64;</li>
+            <li>из каждого zip архива взять файл sqlite3.dll и скопиривать его в соответствующие папки Assets\Plugins\x86 и Assets\Plugins\x64;</li>
+            <li>в папку Assets\Plugins скопировать файлы из папки C:\Program Files\Unity\Hub\Editor\2020.2.3f1\Editor\Data\MonoBleedingEdge\lib\mono\unityjit-win32:</li>
+            <ul class="sub-li">
+                <li>Mono.Data.Sqlite.dll;</li>
+                <li>System.Configuration.dll;</li>
+                <li>System.Data.dll;</li>
+                <li>System.EnterpriseServices.dll;</li>
+                <li>System.Security.dll.</li>
+            </ul>
+    </ul>
+Если Unity в дебаггере/консоли покажет, что в проекте уже используется загруженная dll - то удалить этот файл из папки Plugins.
+
+</p><br>
+<p>
+    Теперь, когда мы подготовили Unity к работе с базой данных перей-дём на <a class="a-text" href="https://github.com/robertohuertasm/SQLite4Unity3d" target="_blank">сайт</a> и скачаем файл SQLite4Unity3d.zip, и разархивируем его в папку Scripts\BDScripts. Создадим скрипт Connection.cs рядом с перенесённым скриптом и импортируем скрипт SQLite4Unity3d в только что созданный нами скрипт.
+Теперь создадим шаблоны таблиц нашей будущей базы данных.
+</p><br>
+<div class="gallery">
+    <img src="../static/img/bd/15.jpg" alt="game_scene.jpg" tabindex="0">
+    <img src="../static/img/bd/16.jpg" alt="game_scene.jpg" tabindex="0">
+    <img src="../static/img/bd/17.jpg" alt="game_scene.jpg" tabindex="0">
+</div>
+<p>
+    Теперь напишем функцию добавления данных в таблицы, которая принимает на вход имя таблицы и список со всей необходимой информацией.
+</p><br>
+<div class="gallery">
+    <img src="../static/img/bd/18.jpg" alt="game_scene.jpg" tabindex="0">
+</div>
+<p>
+    После всех приготовлений наконец-то можно создать саму локальную базу данных.
+</p><br>
+<div class="gallery">
+    <img src="../static/img/bd/19.jpg" alt="game_scene.jpg" tabindex="0">
+</div>
+<p>
+    И в завершении нужно создать функции, с помощью которых мы будем обращаться к информации в базе данных и обновлять её.
+</p><br>
+<div class="gallery">
+    <img src="../static/img/bd/20.jpg" alt="game_scene.jpg" tabindex="0">
+    <img src="../static/img/bd/21.jpg" alt="game_scene.jpg" tabindex="0">
+    <img src="../static/img/bd/22.jpg" alt="game_scene.jpg" tabindex="0">
+</div>
+        <p>
+            Так же рассмотрим следующие скрипты:
+        </p><br>
+        <div class="gallery">
+            <img src="../static/img/bd/OpenBanPanel.jpg" alt="game_scene.jpg" tabindex="0">
+            <img src="../static/img/bd/FunctionalBanPanel.jpg" alt="game_scene.jpg" tabindex="0">
+        </div>
+        <p>
+            Выше представленны скрипты связанные с панелью администратора, в возможности которого входят блокировка и разблокировка пользователей по нику.
+            В первом возможность открытия и закрытия панели, во втором непосредственное взаимодействие с базой данных.
+        </p><br>
+        <div class="gallery">
+            <img src="../static/img/bd/RegLog1.jpg" alt="game_scene.jpg" tabindex="0">
+            <img src="../static/img/bd/RegLog2.jpg" alt="game_scene.jpg" tabindex="0">
+            <img src="../static/img/bd/RegLog3.jpg" alt="game_scene.jpg" tabindex="0">
+            <img src="../static/img/bd/RegLog4.jpg" alt="game_scene.jpg" tabindex="0">
+        </div>
+        <p>
+            В последнем скрипте написана регистрация и авторизация пользователей, для авторизации дополнительно используются функции:<br>
+            -CheckTableLevels;<br>
+            -CheckTableProgress.<br>
+            Используются они для проверки целостности таблицы с данными об уровнях и проверки таблицы личного прогресса, на совпадение с текущим пользователем<br><br>
+            Для регистрации дополнительно используются только функция CheckTableLevels, так как, при создании нового пользователя локальная в случаи чего необходима только
+            таблица содержащую информацию для построения уровней, все остальные же таблицы чистятся.
+        </p><br>
+    </h4>
+</div>
+{% endblock %}
